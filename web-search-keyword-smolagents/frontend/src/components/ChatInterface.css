@@ -1,0 +1,17 @@
+.chat-interface {
+  width: 100%;
+  max-width: 800px;
+  height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
