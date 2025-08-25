@@ -13,7 +13,7 @@ The application has frontend UI which is a ReactJS application and can be found 
 `mcp_server.py` file is MCP server where all tools defined and any tool execution would be performed.
 `mcp_client.py` file is MCP client where communication with MCP server and communication with LLM will be performed
 
-# To run
+## To run
 First, if you want this agent to send you emails about tasks you should enter your email server STMP details into `.env` file. If you don't want to use email feature then find lines related with `EmailManager` in `mcp_server.py` file and comment them out.
 
 #### Setting up front end
