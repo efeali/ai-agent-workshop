@@ -1,7 +1,9 @@
 # MCP To-do Agent
 
-This is the same to-do app as smolagents todo v2, but it uses MCP instead of Smolagents.
-It has more advanced prompt, and also can use ReActAgent which brings features like "reasoning and acting", creating complex decision making workflows (using llama_index's ReActAgent).
+This is the same to-do app as smolagents todo v2, but it uses MCP instead of Smolagents. 
+It has several tools defined for agent for adding task, deleting task, getting task list, marking a task as completed, checking for upcoming tasks (within next 24h), getting current date and sending email notifications.
+Based on your conversation with chat bot, LLM + Agent will decide which tool to use, then call the best matching tool and execute the action. Tasks will be saved in CSV file in project's folder. 
+Compared to Smolagents version, this app has more advanced prompt, and also can use ReActAgent which brings features like "reasoning and acting", creating complex decision making workflows (using llama_index's ReActAgent).
 
 ### Frontend
 The application has frontend UI which is a ReactJS application and can be found under /frontend/ folder.
