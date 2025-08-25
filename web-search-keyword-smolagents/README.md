@@ -13,20 +13,20 @@ If `run_script` tool wasn't defined then the agent would not be able to solve pr
 
 
 
-##### Setting up front end
+#### Setting up front end
 1. `cd frontend`
 2. `npm install`
 
-##### Setting up agent and server 
+#### Setting up agent and server 
 1. `python -m venv .venv`
 2. `.venv\Scripts\activate`
 3. `pip install -r requirements.txt`
 
-##### To use
+#### To use
 Start front end Reactjs app
 1. `npm start`
 
-##### Run web server
+#### Run web server
 1. `python main.py`
 
 Then browse http://localhost:3000/ and start chatting
