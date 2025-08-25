@@ -44,3 +44,34 @@ def run_script(script: str) -> str:
         return f"Error executing script: {str(e)}"
 
 
+class AgentServer():
+    def __init__(self):
+        self.model = LiteLLMModel(
+            model_id="ollama/gemma3:12b",
+            api_base="http://localhost:11434/api/generate"
+        )
+        self.agent = ToolCallingAgent(
+            tools=[WebSearchTool(), PythonInterpreterTool(), run_script],
+            model=self.model
+        )
+
+    def prompt_to_smolagent(self, msg: str) -> str:
+        """
+        Send a prompt to the LLM and return the response.
+
+        Args:
+            msg: The message to send to the LLM.
+
+        Returns:
+            The response from the LLM.
+        """
+        return self.agent.run(msg)
+
+
+
+
+# if __name__ == "__main__":
+#     agent = AgentServer()
+#     response = agent.prompt_to_smolagent(
+#         "give me the list of files in current directory")
+#     print(response)

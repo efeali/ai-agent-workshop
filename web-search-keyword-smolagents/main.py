@@ -16,7 +16,18 @@ def call_agent():
         data = request.get_json()
 
 
-        
+        # Extract the 'msg' variable from the request
+        msg = data.get('msg', '')
+        if not msg:
+            return jsonify({"error": "No message provided"}), 400
+        else:
+
+            agent = AgentServer()
+            response = agent.prompt_to_smolagent(msg)
+            # Return JSON response with 'response' key and 'hello' value
+            return jsonify({
+                "response": response
+            })
 
     except Exception as e:
         # Handle any errors and return error response

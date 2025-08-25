@@ -16,7 +16,17 @@ def add_todo_task(task: str, description: str, due_date: str, due_time: str) -> 
         due_date: Due date in YYYY-MM-DD format
         due_time: Due time in HH:MM format
     """
+    todo_manager = TodoManager()
+    email_manager = EmailManager()
 
+
+    new_id = todo_manager.add_todo(task, description, due_date, due_time)
+    if new_id != -1:
+        email_manager.send_email("New Todo Added",
+                                 f"A new todo has been added:\n\nTask: {task}\nDescription: {description}\nDue Date: {due_date}\nDue Time: {due_time}")
+
+        return f"Todo '{task}' added successfully with ID {new_id}"
+    return "Failed to add todo"
 
 @tool
 def list_all_todos(status: str = None) -> str:
@@ -27,7 +37,8 @@ def list_all_todos(status: str = None) -> str:
         - If None, lists all todos
 
     """
-
+    todo_manager = TodoManager()
+    return todo_manager.list_todos(status)
 
 @tool
 def complete_todo_task(todo_id: int) -> str:
@@ -37,6 +48,8 @@ def complete_todo_task(todo_id: int) -> str:
         todo_id: The ID of the todo to mark as completed
 
     """
+    todo_manager = TodoManager()
+    return todo_manager.complete_todo(todo_id)
 
 @tool
 def delete_todo_task(todo_id: int) -> str:
@@ -46,6 +59,8 @@ def delete_todo_task(todo_id: int) -> str:
         todo_id: The ID of the todo to delete
 
     """
+    todo_manager = TodoManager()
+    return todo_manager.delete_todo(todo_id)
 
 @tool
 def check_upcoming_todos_task(response: bool) -> str | None:
@@ -57,7 +72,18 @@ def check_upcoming_todos_task(response: bool) -> str | None:
         response: If True, return a text
         - If False, don't return a text, just send email reminders
     """
+    todo_manager = TodoManager()
+    email_reminder = EmailManager()
 
+    upcoming_todos = todo_manager.get_upcoming_todos()
+    if upcoming_todos:
+        email_reminder.send_reminder(upcoming_todos)
+        if response:
+            return f"You have {len(upcoming_todos)} todos upcoming within 24hours. Reminders sent via email."
+
+    else:
+        if response:
+            return "No todos due within the next 24 hours."
 
 
 
@@ -66,7 +92,7 @@ def get_current_date() -> str:
     """
     Get the current date in YYYY-MM-DD format
     """
-    
+    return datetime.now().strftime("%Y-%m-%d")
 
 class TodoAgent:
     def __init__(self):
